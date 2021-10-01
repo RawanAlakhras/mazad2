@@ -627,5 +627,8 @@ main{
     .details-title .finishing2{
         width: max-content;
     }
+    .form-area{
+        padding: 4vh 2vh !important;
+    }
     
 }

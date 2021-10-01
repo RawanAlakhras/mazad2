@@ -1,221 +1,360 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" th:href="@{/css/normalize.css}">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-  <link th:href="@{/css/style.css}" rel="stylesheet" />
-  <script src="https://kit.fontawesome.com/9e5d1913ca.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="fontawesome-free-5.15.1-web/css/all.css">
+  <link rel="stylesheet" href="./css/normalize.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+  <link href="./css/master.css" rel="stylesheet" />
+  <link href="./css/style.css" rel="stylesheet" />
   <title>Document</title>
 </head>
+
 <body>
-<!-- start navbar -->
-<nav th:replace="fragments/navbar :: navbar"></nav>
-<!-- end navbar -->
-<div class="profile">
-  <div class="background-img">
+ <!-- start navbar -->
+ <nav class="navbar navbar-expand-lg navbar-light bg-light scroll-nav">
+  <div class="container">
+    <a class="navbar-brand" href="#"><i class="fas fa-gavel"></i>مزاد</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="index.html">الرئيسية</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            خدماتنا
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="allMazad.html"><i class="fas fa-gavel"></i>مزادات</a></li>
+            <li><a class="dropdown-item" href="allMazad.html"><i class="fas fa-home"></i>عقارات</a></li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li><a class="dropdown-item" href="allMazad.html"><i class="fas fa-car"></i>سيارات</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link " aria-current="page" href="about-us.html">معلومات عنا </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link " aria-current="page" href="contact-us.html">تواصل معنا</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-bs-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            <img src="./img/avatar.png" class="nav-img" />
+
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown1">
+            <a class="dropdown-item" href="profile.html"><i class="far fa-user-circle"></i>الملف الشخصي</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="login.html"><i class="far fa-user-circle"></i>تسجيل الدخول</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="signup.html"><i class="far fa-user-circle"></i>تسجيل مستخدم</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt"></i>تسجيل الخروج</a>
+          </ul>
+        </li>
+
+      </ul>
+
+    </div>
   </div>
-  <div class="all-container mb-5 pb-5">
-    <div class="container">
-      <div class="row">
-        <div class="col h-100">
-          <div class="left-side">
-            <img th:src="@{${UserInfo.imgUrl}}" />
-            <h1 th:text="${UserInfo.firstName} + ' '+${UserInfo.lastName}"></h1>
-            <h2 th:text="${UserInfo.username}"></h2>
-            <p th:text="${UserInfo.bio}"></p>
-           <div class="profile-nav">
-             <ul class="nav flex-column">
-               <li class="nav-item">
-                 <a class="nav-link active" href="#" data-toggle="modal" data-target="#exampleModal1" >
-                   <i class="fas fa-plus"></i>Add new product
-                 </a>
-               </li>
-               <li class="nav-item">
-                 <a class="nav-link" href="/myProducts">
-                   <i class="fas fa-box-open"></i>My Products
-                 </a>
-               </li>
-               <li class="nav-item">
-                 <a class="nav-link" href="/wishlist">
-                   <i class="fas fa-heart"></i>Wishlist
-                 </a>
-               </li>
-             </ul>
-           </div>
-          </div>
-        </div>
-        <div class="col-8 h-100">
-          <div class="right-side">
-            <div class="header-info pb-4">
-              <h1>Personal Details</h1>
-              <a href="#" data-toggle="modal" data-target="#exampleModal">
-                <i class="fas fa-edit"></i> Edit
-              </a>
-            </div>
-            <div class="row">
-              <div class="col-3 "><p>First Name</p></div>
-              <div class="col" th:text="${UserInfo.firstName}"></div>
-            </div>
-            <div class="row">
-              <div class="col-3"><p>Last Name </p></div>
-              <div class="col" th:text="${UserInfo.lastName}"></div>
-            </div>
-            <div class="row">
-              <div class="col-3"><p>Date of Birth</p></div>
-              <div class="col"><p th:text="${UserInfo.dateOfBirth}"></p></div>
-            </div>
-            <div class="row">
-              <div class="col-3"><p>Email</p></div>
-              <div class="col"><p th:text="${UserInfo.username}"></p></div>
-            </div>
-            <div class="row">
-              <div class="col-3"><p>Bio</p></div>
-              <div class="col"><p th:text="${UserInfo.bio}"></p></div>
+</nav>
+<!-- end navbar -->
+  <div class="profile">
+    <div class="background-img">
+    </div>
+    <div class="all-container mb-5 pb-5">
+      <div class="container">
+        <div class="row">
+          <div class="col h-100">
+            <div class="left-side">
+              <img src="./img/avatar.png" />
+          
+
+              <div class="profile-nav">
+                <ul class="nav flex-column">
+                  <li class="nav-item">
+                    <a class="nav-link active" href="#" data-toggle="modal" data-target="#exampleModal1">
+                      <i class="fas fa-cart-plus"></i>المشتريات
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">
+                      <i class="fas fa-box-open"></i>المدفوعات
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">
+                      <i class="fas fa-heart"></i>المفضلة
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">
+                      <i class="fas fa-wallet"></i>محفظتي
+                    </a>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
+          <div class="col col-md-8 h-100">
+            <div class="right-side">
+              <div class="header-info pb-4">
+                <h1>ملفي الشخصي</h1>
+                <a href="#" data-toggle="modal" data-target="#exampleModal">
+                  <i class="fas fa-edit"></i> تعديل
+                </a>
+              </div>
+              <div class="row">
+                <div class="col-3 ">
+                  <p>الاسم الاول</p>
+                </div>
+                <div class="col">يوسف</div>
+              </div>
+              <div class="row">
+                <div class="col-3">
+                  <p>اسم العائلة</p>
+                </div>
+                <div class="col">برعي</div>
+              </div>
+              <div class="row">
+                <div class="col-3">
+                  <p>رقم الهوية</p>
+                </div>
+                <div class="col">
+                  <p>2408362941</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-3">
+                  <p>رقم الجوال</p>
+                </div>
+                <div class="col">
+                  <p>562545124</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-3">
+                  <p>البريد الالكتروني</p>
+                </div>
+                <div class="col">
+                  <p>jo_really@yahoo.com</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-3">
+                  <p>تاريخ الميلاد</p>
+                </div>
+                <div class="col">
+                  <p>١٤٤٣/٠٢/٢٣</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-3">
+                  <p>الجنس</p>
+                </div>
+                <div class="col">
+                  <input type="radio" class="form-check-input" id="exampleCheck1" name="gender">
+                  <label class="form-check-label" for="exampleCheck1">ذكر</label>
+                  <input type="radio" class="form-check-input" id="exampleCheck1" name="gender">
+                  <label class="form-check-label" for="exampleCheck1">انثى</label>
+                </div>
+              </div>
+              <div class="header-info pb-4">
+                <h1>العنوان </h1>
+
+               
+              </div>
+              <div class="row">
+                <div class="col-3">
+                  <p>المدينة</p>
+                </div>
+                <div class="col">
+                  <p>عمان</p>
+                </div>
+                <div class="col-3">
+                  <p>الحي</p>
+                </div>
+                <div class="col-3">
+                  <p>حي</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-3">
+                  <p>الرمز البريدي</p>
+                </div>
+                <div class="col">
+                  <p>2222</p>
+                </div>
+                <div class="col-3">
+                  <p>الرمز الاظافي</p>
+                </div>
+                <div class="col-3">
+                  <p>2222</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
         </div>
-
-
       </div>
+
     </div>
 
   </div>
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Edit your info </h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form th:action="@{/editUser}" method="post" enctype="multipart/form-data">
+            <div class="row">
+              <div class="col mb-3">
+                <label for="username" class="form-label">Email</label>
+                <input type="email" name="username" class="form-control" th:value="${UserInfo.getUsername()}"
+                  id="username" aria-describedby="emailHelp">
+              </div>
+              <div class="col mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input name="password" type="password" class="form-control" id="password">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col mb-3">
+                <label for="firstName" class="form-label">First Name</label>
+                <input type="text" name="firstName" class="form-control" th:value="${UserInfo.firstName}" id="firstName"
+                  aria-describedby="emailHelp">
+              </div>
+              <div class="col mb-3">
+                <label for="lastName" class="form-label">last Name</label>
+                <input type="text" name="lastName" class="form-control" th:value="${UserInfo.lastName}" id="lastName"
+                  aria-describedby="emailHelp">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col mb-3">
+                <label for="dateOfBirth" class="form-label">Date of Birth</label>
+                <input type="date" name="dateOfBirth" class="form-control" id="dateOfBirth"
+                  th:value="${UserInfo.dateOfBirth}" aria-describedby="emailHelp">
+              </div>
+              <div class="col mb-3">
+                <label for="imageUrl" class="form-label">Upload a Photo</label>
+                <input type="file" name="imageUrl" class="form-control" id="imageUrl" th:value="${UserInfo.imgUrl}"
+                  aria-describedby="emailHelp">
+              </div>
 
-</div>
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Edit your info </h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form  th:action="@{/editUser}" method="post"
-              enctype="multipart/form-data">
-          <div class="row">
-            <div class="col mb-3">
-              <label for="username" class="form-label">Email</label>
-              <input type="email" name="username" class="form-control"  th:value="${UserInfo.getUsername()}" id="username" aria-describedby="emailHelp" >
-            </div>
-            <div class="col mb-3">
-              <label for="password" class="form-label">Password</label>
-              <input name="password" type="password" class="form-control" id="password">
-            </div>
-          </div>
-          <div class="row">
-            <div class="col mb-3">
-              <label for="firstName" class="form-label">First Name</label>
-              <input type="text" name="firstName" class="form-control"  th:value="${UserInfo.firstName}" id="firstName" aria-describedby="emailHelp">
-            </div>
-            <div class="col mb-3">
-              <label for="lastName" class="form-label">last Name</label>
-              <input type="text" name="lastName" class="form-control" th:value="${UserInfo.lastName}" id="lastName" aria-describedby="emailHelp">
-            </div>
-          </div>
-          <div class="row">
-            <div class="col mb-3">
-              <label for="dateOfBirth" class="form-label">Date of Birth</label>
-              <input type="date" name="dateOfBirth" class="form-control" id="dateOfBirth" th:value="${UserInfo.dateOfBirth}" aria-describedby="emailHelp">
-            </div>
-            <div class="col mb-3">
-              <label for="imageUrl" class="form-label">Upload a Photo</label>
-              <input type="file" name="imageUrl" class="form-control" id="imageUrl" th:value="${UserInfo.imgUrl}" aria-describedby="emailHelp">
             </div>
 
-          </div>
-
-          <div class="mb-3">
-            <label for="bio" class="form-label">bio</label>
-            <input type="text" name="bio" class="form-control" id="bio" th:value="${UserInfo.bio}" aria-describedby="emailHelp">
-          </div>
+            <div class="mb-3">
+              <label for="bio" class="form-label">bio</label>
+              <input type="text" name="bio" class="form-control" id="bio" th:value="${UserInfo.bio}"
+                aria-describedby="emailHelp">
+            </div>
 
 
             <button type="submit" class="btn  btn-outline-info my-btn">Submit</button>
-        </form>
-      </div>
+          </form>
+        </div>
 
+      </div>
     </div>
   </div>
-</div>
-<!--    end modal-->
-<!--Start product Modal -->
-<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel1">Add new product </h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+  <!--    end modal-->
+  <!--Start product Modal -->
+  <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel1">Add new product </h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+          <form th:action="@{/product/{id}(id=${UserInfo.getId()})}" method="post" enctype="multipart/form-data">
+            <div class="row">
+              <div class="col mb-3">
+                <label for="productName" class="form-label">Product Name</label>
+                <input type="text" name="productName" class="form-control" id="productName"
+                  aria-describedby="emailHelp">
+              </div>
+              <div class="col mb-3">
+                <label for="dis" class="form-label">Description</label>
+                <input type="text" name="dis" class="form-control" id="dis" aria-describedby="emailHelp">
+              </div>
+            </div>
+            <div class="row">
+
+              <div class="col mb-3">
+                <label for="productImageUrl" class="form-label">Product Image</label>
+                <input type="file" name="productImageUrl" class="form-control" id="productImageUrl"
+                  aria-describedby="emailHelp">
+              </div>
+              <div class="col mb-3">
+                <label for="secondImage" class="form-label">Second Image</label>
+                <input type="file" name="secondImage" class="form-control" id="secondImage"
+                  aria-describedby="emailHelp">
+              </div>
+
+              <div class="col mb-3">
+                <label for="thirdImage" class="form-label">Third Image</label>
+                <input type="file" name="thirdImage" class="form-control" id="thirdImage" aria-describedby="emailHelp">
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="time" class="form-label">End Time</label>
+              <input type="date" th:min="${UserInfo.getNow()}" name="time" class="form-control" id="time"
+                aria-describedby="emailHelp">
+            </div>
+
+            <div class="row">
+              <div class="col mb-3">
+                <label for="minPrice" class="form-label">Minimum Price</label>
+                <input type="text" name="minPrice" class="form-control" id="minPrice" aria-describedby="emailHelp">
+              </div>
+              <div class="col mb-3">
+                <label for="maxPrice" class="form-label">max Price</label>
+                <input type="text" name="maxPrice" class="form-control" id="maxPrice" aria-describedby="emailHelp">
+              </div>
+            </div>
+
+
+            <input class="btn my-btn" type="submit" value="submit">
+          </form>
+        </div>
+
       </div>
-      <div class="modal-body">
-
-        <form th:action="@{/product/{id}(id=${UserInfo.getId()})}" method="post"
-              enctype="multipart/form-data">
-          <div class="row">
-            <div class="col mb-3">
-              <label for="productName" class="form-label">Product Name</label>
-              <input type="text" name="productName" class="form-control" id="productName" aria-describedby="emailHelp">
-            </div>
-            <div class="col mb-3">
-              <label for="dis" class="form-label">Description</label>
-              <input type="text" name="dis" class="form-control" id="dis" aria-describedby="emailHelp">
-            </div>
-          </div>
-          <div class="row">
-
-            <div class="col mb-3">
-              <label for="productImageUrl" class="form-label">Product Image</label>
-              <input type="file" name="productImageUrl" class="form-control" id="productImageUrl" aria-describedby="emailHelp">
-            </div>
-            <div class="col mb-3">
-              <label for="secondImage" class="form-label">Second Image</label>
-              <input type="file" name="secondImage" class="form-control" id="secondImage" aria-describedby="emailHelp">
-            </div>
-
-            <div class="col mb-3">
-              <label for="thirdImage" class="form-label">Third Image</label>
-              <input type="file" name="thirdImage" class="form-control" id="thirdImage" aria-describedby="emailHelp">
-            </div>
-          </div>
-
-          <div class="mb-3">
-            <label for="time" class="form-label">End Time</label>
-            <input type="date" th:min="${UserInfo.getNow()}" name="time" class="form-control" id="time" aria-describedby="emailHelp">
-          </div>
-
-          <div class="row">
-            <div class="col mb-3">
-              <label for="minPrice" class="form-label">Minimum Price</label>
-              <input type="text" name="minPrice" class="form-control" id="minPrice" aria-describedby="emailHelp">
-            </div>
-            <div class="col mb-3">
-              <label for="maxPrice" class="form-label">max Price</label>
-              <input type="text" name="maxPrice" class="form-control" id="maxPrice" aria-describedby="emailHelp">
-            </div>
-          </div>
-
-
-          <input class="btn my-btn" type="submit" value="submit">
-        </form>
-      </div>
-
     </div>
   </div>
-</div>
-<!--    end product modal-->
-<!-- start footer -->
-<nav th:replace="fragments/navbar :: footer"></nav>
-<!-- end footer -->
+  <!--    end product modal-->
+  
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
-<script th:src="@{/js.js}"></script>
+  <script src="js/jquery-3.5.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+    crossorigin="anonymous"></script>
 </body>
+
 </html>
