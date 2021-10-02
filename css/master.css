@@ -610,7 +610,9 @@ main{
     margin-left: 5px;
 }
 /* end details */
-
+.img-section img{
+    width: 100%;
+}
 /* phone */
 
 @media (max-width:425px) {
